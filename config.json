@@ -87,7 +87,7 @@
     "petroleo": "#0F3D3E",
     "texto_suave": "#5B6B6B"
   },
-  "hashtags": "#IndicaeSobral #Indicacao #BocaABoca #Sobral #PequenosNegocios #AConfiancaCircula",
+  "hashtags": "#Sobral #SobralCE #IndicaeSobral #Indicacao #ProfissionaisDeSobral",
   "chamadas": [
     "Em Sobral, a melhor propaganda sempre foi a indicação. O Indicaê transforma o boca a boca em clientes de verdade 🧡",
     "É profissional ou tem um negócio? No Indicaê, quem te indica são os vizinhos que já contrataram você. Cadastre-se 🧡",
@@ -119,6 +119,50 @@
   ],
   "selo": "INDICAÇÃO EM PAUTA",
   "conteudos_proprios": [
+    {
+      "selo": "RED FLAG × GREEN FLAG",
+      "titulo": "Red flag: pede 100% adiantado. Green flag: manda foto do serviço pronto.",
+      "apoio": "E você, qual red flag já viu? Conta nos comentários.",
+      "texto": "🚩 Pede 100% do valor antes de começar\n💚 Manda foto do serviço pronto antes de você chegar\n\n🚩 Some depois do orçamento\n💚 Explica o preço item por item\n\nQual red flag você já viu ao contratar um profissional? Conta aqui 👇\n\nProcurando eletricista, diarista ou pedreiro em Sobral? No Indicaê você vê quem os vizinhos já indicaram 🧡\n\n📲 Manda pra quem tá precisando contratar alguém."
+    },
+    {
+      "selo": "VOCÊ CONTRATARIA?",
+      "titulo": "Orçamento A: o mais barato. Orçamento B: o mais indicado pelos vizinhos. Qual você escolhe?",
+      "apoio": "Responde nos comentários: A ou B?",
+      "texto": "A) R$ 150, ninguém conhece\nB) R$ 190, 12 vizinhos indicaram\n\nQual você escolhe? Responde com A ou B 👇\n\nNo Indicaê, você encontra profissionais em Sobral indicados por quem já contratou 🧡\n\n📲 Manda pra aquela pessoa que sempre escolhe o mais barato 😅"
+    },
+    {
+      "selo": "MARCA AQUELE AMIGO",
+      "titulo": "Marca aquele amigo que sempre tem o contato do pedreiro bom.",
+      "apoio": "Todo grupo tem um. Agora ele tem um lugar pra indicar: o Indicaê.",
+      "texto": "Todo grupo tem um: aquele amigo que sempre sabe o contato do pedreiro, da diarista, do eletricista de confiança 😄\n\nMarca ele aqui 👇 e chama pra indicar no Indicaê, a rede de indicações de Sobral 🧡"
+    },
+    {
+      "selo": "GUIA RÁPIDO",
+      "titulo": "5 erros ao contratar um eletricista em Sobral (e como evitar).",
+      "apoio": "Salva esse post pra próxima vez que precisar.",
+      "slides": [
+        "Não pedir orçamento por escrito.",
+        "Escolher só pelo menor preço.",
+        "Não perguntar se é habilitado (NR-10).",
+        "Não checar quem já contratou.",
+        "Pagar tudo antes do serviço."
+      ],
+      "texto": "Antes de chamar um eletricista, salva esse guia 📌\n\n1. Peça orçamento por escrito\n2. Preço baixo demais é alerta\n3. Pergunte sobre a habilitação (NR-10)\n4. Veja quem já contratou e indicou\n5. Combine pagamento por etapa\n\nNo Indicaê você encontra eletricista em Sobral indicado por vizinhos 🧡\n\n📲 Manda pra quem vai reformar a casa."
+    },
+    {
+      "selo": "GUIA RÁPIDO",
+      "titulo": "5 sinais de uma diarista de confiança em Sobral.",
+      "apoio": "Salva e compartilha com quem está procurando.",
+      "slides": [
+        "Chega no horário combinado.",
+        "Combina o que está incluído antes.",
+        "Cuida dos seus objetos como se fossem dela.",
+        "Tem quem indique o trabalho.",
+        "Avisa com antecedência se não puder ir."
+      ],
+      "texto": "Procurando diarista em Sobral? Repara nesses 5 sinais 📌\n\n1. Pontualidade\n2. Combinado claro\n3. Cuidado com a casa\n4. Indicação de outras clientes\n5. Aviso com antecedência\n\nNo Indicaê, as diaristas são indicadas por quem já contratou 🧡\n\n📲 Manda pra quem tá precisando."
+    },
     {
       "selo": "DICA INDICAÊ",
       "titulo": "3 sinais de um profissional de confiança: cumpre prazo, explica o preço e tem quem indique.",
@@ -156,7 +200,7 @@
       "apoio": "Indique no Indicaê e ajude um vizinho a encontrar gente boa."
     }
   ],
-  "chamada_final": "👉 indicaesobral.com.br",
+  "chamada_final": "👉 indicaesobral.com.br\n\nProfissionais indicados em Sobral: eletricista · diarista · pedreiro · encanador · manicure · mecânico",
   "reel_a_cada": 2,
   "apoio_padrao": "A vontade de indicar existe. O Indicaê transforma isso em clientes de verdade."
 }

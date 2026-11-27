@@ -13,11 +13,11 @@ jobs:
           ID: ${{ secrets.IG_USER_ID }}
         run: |
           G=https://graph.facebook.com/v21.0
-          echo "== Quem sou eu"; curl -s "$G/me?fields=id,name&access_token=$T" | jq -c .
-          echo "== Permissões"; curl -s "$G/me/permissions?access_token=$T" | jq -c .
-          echo "== Páginas do robô"; curl -s "$G/me/accounts?fields=id,name,instagram_business_account{id,username}&access_token=$T" | jq -c .
-          echo "== Página Indicaê"; curl -s "$G/1417292088139846?fields=id,name,instagram_business_account{id,username},connected_instagram_account&access_token=$T" | jq -c .
-          echo "== Conta $ID"; curl -s "$G/$ID?fields=id,username&access_token=$T" | jq -c .
-          echo "== Conta $ID (só id)"; curl -s "$G/$ID?access_token=$T" | jq -c .
-          echo "== Portfólio"; curl -s "$G/1779636939800028/owned_instagram_accounts?fields=id,username&access_token=$T" | jq -c .
-          echo "== Portfólio (v2)"; curl -s "$G/1779636939800028/instagram_accounts?fields=id,username&access_token=$T" | jq -c .
+          echo "== Quem sou eu"; curl -gs "$G/me?fields=id,name&access_token=$T" | jq -c .
+          echo "== Permissões"; curl -gs "$G/me/permissions?access_token=$T" | jq -c .
+          echo "== Páginas do robô"; curl -gs "$G/me/accounts?fields=id,name,instagram_business_account{id,username}&access_token=$T" | jq -c .
+          echo "== Página Indicaê"; curl -gs "$G/1417292088139846?fields=id,name,instagram_business_account,connected_instagram_account&access_token=$T" | jq -c .
+          echo "== Conta $ID"; curl -gs "$G/$ID?fields=id,username&access_token=$T" | jq -c .
+          echo "== Conta $ID (só id)"; curl -gs "$G/$ID?access_token=$T" | jq -c .
+          echo "== Portfólio"; curl -gs "$G/1779636939800028/owned_instagram_accounts?fields=id,username&access_token=$T" | jq -c .
+          echo "== Portfólio (v2)"; curl -gs "$G/1779636939800028/instagram_accounts?fields=id,username&access_token=$T" | jq -c .

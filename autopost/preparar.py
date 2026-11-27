@@ -46,7 +46,8 @@ def separar_fonte(titulo):
 
 def proibida(texto):
     t = texto.lower()
-    return any(p in t for p in CONFIG["palavras_proibidas"])
+    # compara pelo começo da palavra ("presa" não pega "empresa")
+    return any(re.search(r"(?<!\w)" + re.escape(p.strip()), t) for p in CONFIG["palavras_proibidas"])
 
 
 def buscar_noticias(feeds=None):

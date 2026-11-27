@@ -23,6 +23,7 @@ REPO = os.environ.get("GITHUB_REPOSITORY", "")
 GH_TOKEN = os.environ.get("GITHUB_TOKEN", "")
 IG_TOKEN = os.environ.get("IG_TOKEN", "")
 IG_USER_ID = os.environ.get("IG_USER_ID", "")
+MAKE_WEBHOOK = os.environ.get("MAKE_WEBHOOK", "")
 
 
 def gh(metodo, caminho, **kw):
@@ -59,14 +60,27 @@ def ig_criar(params):
     return r.json()["id"]
 
 
+def via_make(pasta, legenda):
+    """Envia o post ao Make.com, que publica com o app aprovado pela Meta."""
+    r = requests.post(MAKE_WEBHOOK, json={
+        "feed_url": url_publica(pasta, "feed.jpg"),
+        "stories_url": url_publica(pasta, "stories.jpg"),
+        "video_url": url_publica(pasta, "reel.mp4") if (RAIZ / pasta / "reel.mp4").exists() else "",
+        "legenda": legenda,
+    }, timeout=120)
+    if not r.ok:
+        raise RuntimeError(f"Make recusou: {r.status_code} {r.text[:300]}")
+    return r.text.strip()[:200] or "enviado ao Make"
+
+
 def url_publica(pasta, arquivo):
     ramo = os.environ.get("GITHUB_REF_NAME", "main")
     return f"https://raw.githubusercontent.com/{REPO}/{ramo}/{pasta}/{arquivo}"
 
 
 def main():
-    if not (GH_TOKEN and IG_TOKEN and IG_USER_ID and REPO):
-        sys.exit("Faltam os segredos IG_TOKEN e/ou IG_USER_ID no GitHub.")
+    if not (GH_TOKEN and REPO and (MAKE_WEBHOOK or (IG_TOKEN and IG_USER_ID))):
+        sys.exit("Falta o segredo MAKE_WEBHOOK (ou IG_TOKEN + IG_USER_ID) no GitHub.")
 
     prazo = timedelta(hours=CONFIG["horas_para_cancelar"])
     agora = datetime.now(timezone.utc)
@@ -92,8 +106,12 @@ def main():
             continue
 
         try:
-            feed_id = ig_criar({"image_url": url_publica(pasta, "feed.jpg"), "caption": legenda})
-            story_id = ig_criar({"image_url": url_publica(pasta, "stories.jpg"), "media_type": "STORIES"})
+            if MAKE_WEBHOOK:
+                feed_id = via_make(pasta, legenda)
+                story_id = "(pelo Make)"
+            else:
+                feed_id = ig_criar({"image_url": url_publica(pasta, "feed.jpg"), "caption": legenda})
+                story_id = ig_criar({"image_url": url_publica(pasta, "stories.jpg"), "media_type": "STORIES"})
         except Exception as e:  # avisa na própria Issue e segue
             gh("POST", f"/issues/{n}/comments", json={"body": f"❌ Erro ao publicar:\n\n```\n{e}\n```"})
             gh("POST", f"/issues/{n}/labels", json={"labels": ["erro"]})

@@ -17,6 +17,7 @@ import feedparser
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import arte  # noqa: E402
+import reel  # noqa: E402
 
 RAIZ = Path(__file__).resolve().parent.parent
 CONFIG = json.loads((RAIZ / "config.json").read_text(encoding="utf-8"))
@@ -102,7 +103,7 @@ def conteudo_proprio(hist):
     c = lista[i]
     legenda = f"{c['texto']}\n\n{CONFIG['chamada_final']}\n\n{CONFIG['hashtags']}"
     return {"titulo": c["titulo"], "fonte": CONFIG["site"], "link": f"proprio-{i}",
-            "resumo": "", "selo": c["selo"], "legenda": legenda}
+            "resumo": "", "selo": c["selo"], "legenda": legenda, "apoio": c.get("apoio")}
 
 
 def main(feeds=None, forcar_proprio=False):
@@ -116,6 +117,14 @@ def main(feeds=None, forcar_proprio=False):
     data_txt = f"{agora.day} de {MESES[agora.month - 1]} de {agora.year}"
     arte.gerar(it["titulo"], it["fonte"], data_txt, CONFIG["cores"], CONFIG["site"], it.get("selo", CONFIG["selo"]),
                pasta / "feed.jpg", pasta / "stories.jpg")
+
+    hist["total"] = hist.get("total", 0) + 1
+    if hist["total"] % CONFIG.get("reel_a_cada", 2) == 0:
+        try:
+            reel.gerar(it["titulo"], it.get("apoio") or CONFIG["apoio_padrao"], CONFIG["cores"],
+                       CONFIG["site"], it.get("selo", CONFIG["selo"]), pasta / "reel.mp4")
+        except Exception as e:  # sem vídeo, segue como foto
+            print(f"Reel não gerado: {e}", file=sys.stderr)
 
     post = {**it, "legenda": it.get("legenda") or montar_legenda(it), "criado_em": agora.isoformat()}
     (pasta / "post.json").write_text(json.dumps(post, ensure_ascii=False, indent=2), encoding="utf-8")

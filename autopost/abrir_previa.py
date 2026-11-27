@@ -34,6 +34,7 @@ Vai ser publicado sozinho em **{horas} horas**, a menos que você cancele.
 ### Feed
 <img src="{base}/feed.jpg" width="360">
 
+{"### Reel (vídeo)" + chr(10) + f"[▶️ Assistir o Reel]({base}/reel.mp4) — este post sai como Reel." + chr(10) if (RAIZ / pasta / "reel.mp4").exists() else ""}
 ### Stories
 <img src="{base}/stories.jpg" width="240">
 

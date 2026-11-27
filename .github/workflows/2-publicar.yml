@@ -23,4 +23,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           IG_TOKEN: ${{ secrets.IG_TOKEN }}
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          MAKE_WEBHOOK: ${{ secrets.MAKE_WEBHOOK }}
         run: python autopost/publicar.py

@@ -1,0 +1,39 @@
+name: 1 - Preparar post (prévia)
+
+on:
+  schedule:
+    - cron: "0 11 */2 * *"   # a cada 2 dias, 8h de Brasília
+  workflow_dispatch: {}       # botão "Run workflow" para testar na hora
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  preparar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - name: Buscar notícia e montar artes
+        id: prep
+        run: echo "pasta=$(python autopost/preparar.py)" >> "$GITHUB_OUTPUT"
+      - name: Salvar imagens no repositório
+        if: steps.prep.outputs.pasta != ''
+        run: |
+          git config user.name "indicae-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add posts dados
+          git commit -m "Post de $(date +%F)"
+          git push
+      - name: Abrir prévia
+        if: steps.prep.outputs.pasta != ''
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python autopost/abrir_previa.py "${{ steps.prep.outputs.pasta }}"
+      - name: Sem notícia boa hoje
+        if: steps.prep.outputs.pasta == ''
+        run: echo "Nenhuma notícia nova e adequada encontrada. Tento de novo na próxima rodada."

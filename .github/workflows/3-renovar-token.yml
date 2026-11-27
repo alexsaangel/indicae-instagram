@@ -1,0 +1,20 @@
+name: 3 - Testar conexão com o Instagram
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  testar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Conferir conta
+        env:
+          IG_TOKEN: ${{ secrets.IG_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+        run: |
+          echo "Contas do Instagram que o robô enxerga:"
+          curl -s "https://graph.facebook.com/v21.0/me/accounts?fields=name,instagram_business_account{id,username}&access_token=$IG_TOKEN" | jq '.data // .'
+          if [ -n "$IG_USER_ID" ]; then
+            echo "Conta configurada em IG_USER_ID:"
+            curl -s "https://graph.facebook.com/v21.0/$IG_USER_ID?fields=id,username&access_token=$IG_TOKEN" | jq .
+          fi

@@ -1,0 +1,33 @@
+{
+  "nome_marca": "Indicaê Sobral",
+  "site": "indicaesobral.com.br",
+  "instagram": "@indicaesobral",
+  "horas_para_cancelar": 4,
+  "buscas_noticias": [
+    "Sobral Ceará",
+    "Sobral comércio",
+    "Sobral empreendedorismo",
+    "Sobral serviços prefeitura"
+  ],
+  "palavras_proibidas": [
+    "morte", "morre", "morreu", "morto", "mortos", "óbito", "assassin", "homicídio", "crime", "criminoso",
+    "polícia", "policial", "preso", "presa", "prisão", "tiro", "baleado", "arma", "roubo", "assalto",
+    "furto", "tráfico", "droga", "estupro", "violência", "agressão", "acidente", "colisão", "capota",
+    "afogad", "incêndio", "tragédia", "velório", "enterro", "corpo", "facção", "operação policial",
+    "eleição", "candidato", "partido", "deputado", "vereador", "senador", "governador", "lula", "bolsonaro",
+    "escândalo", "denúncia", "investigação", "processo", "condenado"
+  ],
+  "cores": {
+    "fundo": "#FBF3E8",
+    "laranja": "#F2622E",
+    "petroleo": "#0F3D3E",
+    "texto_suave": "#5B6B6B"
+  },
+  "hashtags": "#Sobral #SobralCE #ZonaNorteCE #IndicaeSobral #AConfiancaCircula",
+  "chamadas": [
+    "Conhece um profissional de confiança aqui em Sobral? Indique no Indicaê e ajude um vizinho 🧡",
+    "Precisando de alguém bom pra um serviço? No Indicaê você encontra quem os vizinhos já aprovaram na prática 🧡",
+    "Em Sobral, a melhor propaganda sempre foi a indicação. Agora ela tem endereço: o Indicaê 🧡",
+    "Teve uma boa experiência com um profissional da cidade? Conta pra gente e indique no Indicaê 🧡"
+  ]
+}

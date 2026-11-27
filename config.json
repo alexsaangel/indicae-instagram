@@ -62,7 +62,13 @@
     "denúncia",
     "investigação",
     "processo",
-    "condenado"
+    "condenado",
+    "inteligência artificial",
+    "chatgpt",
+    "algoritmo",
+    "robô",
+    "chatbot",
+    "ia"
   ],
   "cores": {
     "fundo": "#FBF3E8",
@@ -79,23 +85,18 @@
     "Teve uma boa experiência com um profissional? Indique no Indicaê e ajude outro vizinho 🧡"
   ],
   "palavras_relevantes": [
-    "indica",
+    "indicação",
+    "indicações",
+    "indicam",
+    "indicar",
+    "indicaria",
     "boca a boca",
     "boca-a-boca",
-    "recomenda",
-    "confiança",
-    "avaliação",
-    "avaliações",
-    "reputação",
-    "cliente",
-    "consumidor",
-    "prestador",
-    "autônomo",
-    "pequenos negócios",
-    "pequena empresa",
-    "empreendedor",
-    "MEI",
-    "fideliza"
+    "recomendação de amigos",
+    "recomendam",
+    "recomendação",
+    "confiam em amigos",
+    "referral"
   ],
   "selo": "INDICAÇÃO EM PAUTA"
 }

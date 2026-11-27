@@ -50,12 +50,12 @@ def _pilula(draw, x, y, texto, fonte, fundo, cor):
     return alt
 
 
-def gerar(titulo, fonte_noticia, data_txt, cores, site, destino_feed, destino_story):
-    _desenhar(1080, 1350, titulo, fonte_noticia, data_txt, cores, site, destino_feed, story=False)
-    _desenhar(1080, 1920, titulo, fonte_noticia, data_txt, cores, site, destino_story, story=True)
+def gerar(titulo, fonte_noticia, data_txt, cores, site, selo, destino_feed, destino_story):
+    _desenhar(1080, 1350, titulo, fonte_noticia, data_txt, cores, site, selo, destino_feed, story=False)
+    _desenhar(1080, 1920, titulo, fonte_noticia, data_txt, cores, site, selo, destino_story, story=True)
 
 
-def _desenhar(W, H, titulo, fonte_noticia, data_txt, cores, site, destino, story):
+def _desenhar(W, H, titulo, fonte_noticia, data_txt, cores, site, selo, destino, story):
     img = Image.new("RGB", (W, H), cores["fundo"])
     d = ImageDraw.Draw(img)
     m = 90
@@ -66,7 +66,7 @@ def _desenhar(W, H, titulo, fonte_noticia, data_txt, cores, site, destino, story
     d.ellipse([W - r, -r, W + r, r], fill=cores["laranja"])
 
     # selo
-    _pilula(d, m, topo, "SOBRAL EM PAUTA", _fonte("inter-latin-700-normal.woff", 30), cores["petroleo"], cores["fundo"])
+    _pilula(d, m, topo, selo, _fonte("inter-latin-700-normal.woff", 30), cores["petroleo"], cores["fundo"])
     d.text((m, topo + 110), data_txt, font=_fonte("inter-latin-600-normal.woff", 32), fill=cores["texto_suave"])
 
     # faixa inferior
@@ -90,7 +90,7 @@ def _desenhar(W, H, titulo, fonte_noticia, data_txt, cores, site, destino, story
     d.text((m + 40, y + 30), f"Fonte: {fonte_noticia}", font=_fonte("inter-latin-600-normal.woff", 32), fill=cores["texto_suave"])
 
     if story:
-        _pilula(d, m, H - faixa - 170, "Leia mais no nosso feed", _fonte("inter-latin-700-normal.woff", 34), cores["laranja"], "#FFFFFF")
+        _pilula(d, m, H - faixa - 170, "Conheça o Indicaê: link na bio", _fonte("inter-latin-700-normal.woff", 34), cores["laranja"], "#FFFFFF")
 
     destino.parent.mkdir(parents=True, exist_ok=True)
     img.save(destino, "JPEG", quality=92)

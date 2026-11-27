@@ -52,7 +52,7 @@ def proibida(texto):
 def buscar_noticias(feeds=None):
     if feeds is None:
         feeds = [
-            "https://news.google.com/rss/search?q=" + urllib.parse.quote(q + " when:7d")
+            "https://news.google.com/rss/search?q=" + urllib.parse.quote(q + " when:30d")
             + "&hl=pt-BR&gl=BR&ceid=BR:pt-419"
             for q in CONFIG["buscas_noticias"]
         ]
@@ -70,7 +70,8 @@ def escolher(itens, hist):
     for it in itens:
         if it["link"] in vistos or it["titulo"].lower() in vistos:
             continue
-        if "sobral" not in (it["titulo"] + " " + it["resumo"]).lower():
+        texto = (it["titulo"] + " " + it["resumo"]).lower()
+        if not any(p.lower() in texto for p in CONFIG["palavras_relevantes"]):
             continue
         if proibida(it["titulo"] + " " + it["resumo"]):
             continue
@@ -83,7 +84,7 @@ def escolher(itens, hist):
 def montar_legenda(it):
     chamada = random.choice(CONFIG["chamadas"])
     return (
-        f"📰 {it['titulo']}\n\n"
+        f"💡 {it['titulo']}\n\n"
         f"Fonte: {it['fonte']}. A matéria completa está no site do veículo.\n\n"
         f"{chamada}\n"
         f"👉 {CONFIG['site']}\n\n"
@@ -101,7 +102,7 @@ def main(feeds=None):
     agora = datetime.now(FUSO)
     pasta = RAIZ / "posts" / agora.strftime("%Y-%m-%d")
     data_txt = f"{agora.day} de {MESES[agora.month - 1]} de {agora.year}"
-    arte.gerar(it["titulo"], it["fonte"], data_txt, CONFIG["cores"], CONFIG["site"],
+    arte.gerar(it["titulo"], it["fonte"], data_txt, CONFIG["cores"], CONFIG["site"], CONFIG["selo"],
                pasta / "feed.jpg", pasta / "stories.jpg")
 
     post = {**it, "legenda": montar_legenda(it), "criado_em": agora.isoformat()}

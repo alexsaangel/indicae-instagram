@@ -122,33 +122,41 @@
     {
       "selo": "DICA INDICAÊ",
       "titulo": "3 sinais de um profissional de confiança: cumpre prazo, explica o preço e tem quem indique.",
-      "texto": "Antes de contratar alguém pra sua casa ou empresa, observe:\n\n✅ Cumpre o que combina, inclusive o horário\n✅ Explica o preço antes de começar\n✅ Tem clientes que indicam o trabalho\n\nO terceiro é o mais difícil de fingir. No Indicaê, você vê quem os vizinhos de Sobral já indicaram 🧡"
+      "texto": "Antes de contratar alguém pra sua casa ou empresa, observe:\n\n✅ Cumpre o que combina, inclusive o horário\n✅ Explica o preço antes de começar\n✅ Tem clientes que indicam o trabalho\n\nO terceiro é o mais difícil de fingir. No Indicaê, você vê quem os vizinhos de Sobral já indicaram 🧡",
+      "apoio": "O terceiro é o mais difícil de fingir. No Indicaê, você vê quem os vizinhos de Sobral já indicaram."
     },
     {
       "selo": "COMO FUNCIONA",
       "titulo": "Indicou, ajudou. Simples assim: em Sobral, a confiança circula.",
-      "texto": "Funciona assim:\n\n1️⃣ Você contratou alguém bom\n2️⃣ Indica no Indicaê em segundos\n3️⃣ O profissional ganha reputação e o vizinho acha quem precisa\n\nSem anúncio, sem estrela inventada: só indicação de quem contratou de verdade 🧡"
+      "texto": "Funciona assim:\n\n1️⃣ Você contratou alguém bom\n2️⃣ Indica no Indicaê em segundos\n3️⃣ O profissional ganha reputação e o vizinho acha quem precisa\n\nSem anúncio, sem estrela inventada: só indicação de quem contratou de verdade 🧡",
+      "apoio": "Sem anúncio, sem estrela inventada: só indicação de quem contratou de verdade."
     },
     {
       "selo": "PARA PROFISSIONAIS",
       "titulo": "Profissional de Sobral: seus clientes já falam bem de você. Deixe isso trabalhar a seu favor.",
-      "texto": "Eletricista, diarista, manicure, mecânico, professor particular...\n\nO boca a boca sempre foi sua melhor propaganda. No Indicaê ele vira perfil, reputação e novos clientes.\n\n30 dias grátis para começar 🧡"
+      "texto": "Eletricista, diarista, manicure, mecânico, professor particular...\n\nO boca a boca sempre foi sua melhor propaganda. No Indicaê ele vira perfil, reputação e novos clientes.\n\n30 dias grátis para começar 🧡",
+      "apoio": "O boca a boca sempre foi sua melhor propaganda. No Indicaê ele vira novos clientes. 30 dias grátis."
     },
     {
       "selo": "PARA EMPRESAS",
       "titulo": "Cliente satisfeito que indica vale mais que qualquer anúncio. Sua empresa tem um programa de indicação?",
-      "texto": "Com o Indicaê para Empresas, você cria seu programa de indicação com recompensas, acompanha quem indicou e premia sem planilha.\n\nFeito para negócios de Sobral e região 🧡"
+      "texto": "Com o Indicaê para Empresas, você cria seu programa de indicação com recompensas, acompanha quem indicou e premia sem planilha.\n\nFeito para negócios de Sobral e região 🧡",
+      "apoio": "Crie seu programa de indicação com recompensas e acompanhe tudo sem planilha."
     },
     {
       "selo": "VOCÊ SABIA?",
       "titulo": "A maioria das pessoas confia mais na indicação de um conhecido do que em qualquer propaganda.",
-      "texto": "Por isso, antes de contratar, a gente pergunta no grupo da família, do condomínio, do trabalho...\n\nO Indicaê reúne essas indicações num lugar só, organizadas por serviço e bairro 🧡"
+      "texto": "Por isso, antes de contratar, a gente pergunta no grupo da família, do condomínio, do trabalho...\n\nO Indicaê reúne essas indicações num lugar só, organizadas por serviço e bairro 🧡",
+      "apoio": "O Indicaê reúne as indicações de Sobral num lugar só, por serviço e bairro."
     },
     {
       "selo": "INDIQUE UM PROFISSIONAL",
       "titulo": "Teve uma boa experiência com alguém da cidade? Conta pra gente.",
-      "texto": "Aquele pedreiro caprichoso, a costureira que salvou seu vestido, o técnico que resolveu na primeira visita...\n\nIndique no Indicaê e ajude um vizinho a encontrar gente boa 🧡"
+      "texto": "Aquele pedreiro caprichoso, a costureira que salvou seu vestido, o técnico que resolveu na primeira visita...\n\nIndique no Indicaê e ajude um vizinho a encontrar gente boa 🧡",
+      "apoio": "Indique no Indicaê e ajude um vizinho a encontrar gente boa."
     }
   ],
-  "chamada_final": "👉 indicaesobral.com.br"
+  "chamada_final": "👉 indicaesobral.com.br",
+  "reel_a_cada": 2,
+  "apoio_padrao": "A vontade de indicar existe. O Indicaê transforma isso em clientes de verdade."
 }

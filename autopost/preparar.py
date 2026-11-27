@@ -5,6 +5,7 @@ O workflow do GitHub usa essa pasta para abrir a Issue de prévia.
 """
 import html
 import json
+import os
 import random
 import re
 import sys
@@ -61,7 +62,7 @@ def buscar_noticias(feeds=None):
     for url in feeds:
         for e in feedparser.parse(url).entries:
             titulo, fonte = separar_fonte(limpar(e.get("title")))
-            itens.append({"titulo": titulo, "fonte": fonte, "link": e.get("link", ""),
+            itens.append({"titulo": titulo, "fonte": "Fonte: " + fonte, "link": e.get("link", ""),
                           "resumo": limpar(e.get("summary"))})
     return itens
 
@@ -86,31 +87,42 @@ def montar_legenda(it):
     chamada = random.choice(CONFIG["chamadas"])
     return (
         f"💡 {it['titulo']}\n\n"
-        f"Fonte: {it['fonte']}. A matéria completa está no site do veículo.\n\n"
+        f"{it['fonte']}. A matéria completa está no site do veículo.\n\n"
         f"{chamada}\n"
         f"👉 {CONFIG['site']}\n\n"
         f"{CONFIG['hashtags']}"
     )
 
 
-def main(feeds=None):
+def conteudo_proprio(hist):
+    """Dias sem notícia boa: usa o rodízio de conteúdos do Indicaê."""
+    lista = CONFIG["conteudos_proprios"]
+    i = hist.get("rodizio", 0) % len(lista)
+    hist["rodizio"] = i + 1
+    c = lista[i]
+    legenda = f"{c['texto']}\n\n{CONFIG['chamada_final']}\n\n{CONFIG['hashtags']}"
+    return {"titulo": c["titulo"], "fonte": CONFIG["site"], "link": f"proprio-{i}",
+            "resumo": "", "selo": c["selo"], "legenda": legenda}
+
+
+def main(feeds=None, forcar_proprio=False):
     hist = carregar_historico()
-    it = escolher(buscar_noticias(feeds), hist)
+    it = None if forcar_proprio else escolher(buscar_noticias(feeds), hist)
     if not it:
-        print("", end="")
-        return None
+        it = conteudo_proprio(hist)
 
     agora = datetime.now(FUSO)
     pasta = RAIZ / "posts" / agora.strftime("%Y-%m-%d")
     data_txt = f"{agora.day} de {MESES[agora.month - 1]} de {agora.year}"
-    arte.gerar(it["titulo"], it["fonte"], data_txt, CONFIG["cores"], CONFIG["site"], CONFIG["selo"],
+    arte.gerar(it["titulo"], it["fonte"], data_txt, CONFIG["cores"], CONFIG["site"], it.get("selo", CONFIG["selo"]),
                pasta / "feed.jpg", pasta / "stories.jpg")
 
-    post = {**it, "legenda": montar_legenda(it), "criado_em": agora.isoformat()}
+    post = {**it, "legenda": it.get("legenda") or montar_legenda(it), "criado_em": agora.isoformat()}
     (pasta / "post.json").write_text(json.dumps(post, ensure_ascii=False, indent=2), encoding="utf-8")
 
-    hist["links"].append(it["link"])
-    hist["titulos"].append(it["titulo"])
+    if not it["link"].startswith("proprio-"):
+        hist["links"].append(it["link"])
+        hist["titulos"].append(it["titulo"])
     hist["links"], hist["titulos"] = hist["links"][-300:], hist["titulos"][-300:]
     HISTORICO.parent.mkdir(exist_ok=True)
     HISTORICO.write_text(json.dumps(hist, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -120,4 +132,4 @@ def main(feeds=None):
 
 
 if __name__ == "__main__":
-    main()
+    main(forcar_proprio=os.environ.get("CONTEUDO_PROPRIO") == "1")

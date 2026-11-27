@@ -87,7 +87,7 @@ def _desenhar(W, H, titulo, fonte_noticia, data_txt, cores, site, selo, destino,
         d.text((m + 40, y), ln, font=f, fill=cores["petroleo"])
         y += lh
 
-    d.text((m + 40, y + 30), f"Fonte: {fonte_noticia}", font=_fonte("inter-latin-600-normal.woff", 32), fill=cores["texto_suave"])
+    d.text((m + 40, y + 30), f"{fonte_noticia}", font=_fonte("inter-latin-600-normal.woff", 32), fill=cores["texto_suave"])
 
     if story:
         _pilula(d, m, H - faixa - 170, "Conheça o Indicaê: link na bio", _fonte("inter-latin-700-normal.woff", 34), cores["laranja"], "#FFFFFF")

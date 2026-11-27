@@ -94,7 +94,7 @@ def main():
             gh("POST", f"/issues/{n}/comments", json={"body": "🚫 Cancelado. Não vou publicar este."})
             gh("PATCH", f"/issues/{n}", json={"state": "closed", "state_reason": "not_planned"})
             continue
-        if agora - criada < prazo:
+        if agora - criada < prazo and os.environ.get("PUBLICAR_AGORA") != "true":
             print(f"#{n}: ainda dentro do prazo de cancelamento.")
             continue
 

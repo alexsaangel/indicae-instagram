@@ -103,7 +103,8 @@ def conteudo_proprio(hist):
     c = lista[i]
     legenda = f"{c['texto']}\n\n{CONFIG['chamada_final']}\n\n{CONFIG['hashtags']}"
     return {"titulo": c["titulo"], "fonte": CONFIG["site"], "link": f"proprio-{i}",
-            "resumo": "", "selo": c["selo"], "legenda": legenda, "apoio": c.get("apoio")}
+            "resumo": "", "selo": c["selo"], "legenda": legenda, "apoio": c.get("apoio"),
+            "slides": c.get("slides")}
 
 
 def main(feeds=None, forcar_proprio=False):
@@ -119,7 +120,11 @@ def main(feeds=None, forcar_proprio=False):
                pasta / "feed.jpg", pasta / "stories.jpg")
 
     hist["total"] = hist.get("total", 0) + 1
-    if hist["total"] % CONFIG.get("reel_a_cada", 2) == 0:
+    if it.get("slides"):
+        arquivos = arte.gerar_carrossel(it["titulo"], it["slides"], CONFIG["cores"], CONFIG["site"],
+                                        it.get("selo", CONFIG["selo"]), pasta)
+        it["carrossel"] = [a.name for a in arquivos]
+    elif hist["total"] % CONFIG.get("reel_a_cada", 2) == 0:
         try:
             reel.gerar(it["titulo"], it.get("apoio") or CONFIG["apoio_padrao"], CONFIG["cores"],
                        CONFIG["site"], it.get("selo", CONFIG["selo"]), pasta / "reel.mp4")

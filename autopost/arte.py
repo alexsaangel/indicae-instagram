@@ -94,3 +94,43 @@ def _desenhar(W, H, titulo, fonte_noticia, data_txt, cores, site, selo, destino,
 
     destino.parent.mkdir(parents=True, exist_ok=True)
     img.save(destino, "JPEG", quality=92)
+
+
+def gerar_carrossel(titulo, slides, cores, site, selo, pasta):
+    """Capa + 1 slide por item + slide final. Retorna a lista de arquivos (máx. 10)."""
+    W, H = 1080, 1350
+    arquivos = []
+    # capa
+    capa = pasta / "carrossel_01.jpg"
+    pasta.mkdir(parents=True, exist_ok=True)
+    _desenhar(W, H, titulo, "Arrasta pro lado e salva", "", cores, site, selo, capa, False)
+    arquivos.append(capa)
+    for n, txt in enumerate(slides, start=1):
+        img = Image.new("RGB", (W, H), cores["fundo"])
+        d = ImageDraw.Draw(img)
+        d.text((90, 150), f"{n:02d}", font=_fonte("Fraunces-800.woff", 220), fill=cores["laranja"])
+        f, linhas, lh = _titulo_que_cabe(d, txt, W - 180, 600, [86, 78, 70, 62, 56])
+        y = 560
+        for ln in linhas:
+            d.text((90, y), ln, font=f, fill=cores["petroleo"])
+            y += lh
+        d.rectangle([0, H - 150, W, H], fill=cores["petroleo"])
+        d.text((90, H - 75), f"Indicaê · {site}", font=_fonte("inter-latin-600-normal.woff", 34),
+               fill=cores["fundo"], anchor="lm")
+        d.text((W - 90, H - 75), f"{n}/{len(slides)}", font=_fonte("inter-latin-600-normal.woff", 34),
+               fill=cores["fundo"], anchor="rm")
+        arq = pasta / f"carrossel_{n + 1:02d}.jpg"
+        img.save(arq, "JPEG", quality=92)
+        arquivos.append(arq)
+    # final
+    img = Image.new("RGB", (W, H), cores["petroleo"])
+    d = ImageDraw.Draw(img)
+    d.text((W // 2, 520), "Indicaê", font=_fonte("Fraunces-800.woff", 150), fill=cores["fundo"], anchor="mm")
+    d.text((W // 2, 660), "A confiança circula", font=_fonte("inter-latin-600-normal.woff", 48), fill=cores["fundo"], anchor="mm")
+    d.text((W // 2, 820), "Salva este post e manda", font=_fonte("inter-latin-400-normal.woff", 42), fill=cores["fundo"], anchor="mm")
+    d.text((W // 2, 880), "pra quem está precisando.", font=_fonte("inter-latin-400-normal.woff", 42), fill=cores["fundo"], anchor="mm")
+    _pilula(d, W // 2 - 260, 980, f"  {site}  ", _fonte("inter-latin-700-normal.woff", 42), cores["laranja"], "#FFFFFF")
+    fim = pasta / f"carrossel_{len(slides) + 2:02d}.jpg"
+    img.save(fim, "JPEG", quality=92)
+    arquivos.append(fim)
+    return arquivos[:10]

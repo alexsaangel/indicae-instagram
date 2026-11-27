@@ -32,7 +32,7 @@ Vai ser publicado sozinho em **{horas} horas**, a menos que você cancele.
 **Para mudar a legenda:** edite esta descrição (só o texto dentro do bloco da legenda).
 
 ### Feed
-<img src="{base}/feed.jpg" width="360">
+{"".join(f'<img src="{base}/{f}" width="180"> ' for f in post.get("carrossel", [])) or f'<img src="{base}/feed.jpg" width="360">'}
 
 {"### Reel (vídeo)" + chr(10) + f"[▶️ Assistir o Reel]({base}/reel.mp4) — este post sai como Reel." + chr(10) if (RAIZ / pasta / "reel.mp4").exists() else ""}
 ### Stories

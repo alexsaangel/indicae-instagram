@@ -60,6 +60,14 @@ def ig_criar(params):
     return r.json()["id"]
 
 
+def carrossel(pasta):
+    try:
+        post = json.loads((RAIZ / pasta / "post.json").read_text(encoding="utf-8"))
+        return post.get("carrossel") or []
+    except Exception:
+        return []
+
+
 def via_make(pasta, legenda):
     """Envia o post ao Make.com, que publica com o app aprovado pela Meta."""
     r = requests.post(MAKE_WEBHOOK, json={
@@ -67,6 +75,7 @@ def via_make(pasta, legenda):
         "stories_url": url_publica(pasta, "stories.jpg"),
         "video_url": url_publica(pasta, "reel.mp4") if (RAIZ / pasta / "reel.mp4").exists() else "",
         "legenda": legenda,
+        "carrossel_urls": [url_publica(pasta, f) for f in carrossel(pasta)],
     }, timeout=120)
     if not r.ok:
         raise RuntimeError(f"Make recusou: {r.status_code} {r.text[:300]}")

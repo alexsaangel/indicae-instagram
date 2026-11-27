@@ -9,12 +9,14 @@ jobs:
     steps:
       - name: Conferir conta
         env:
-          IG_TOKEN: ${{ secrets.IG_TOKEN }}
-          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          T: ${{ secrets.IG_TOKEN }}
+          ID: ${{ secrets.IG_USER_ID }}
         run: |
-          echo "Contas do Instagram que o robô enxerga:"
-          curl -s "https://graph.facebook.com/v21.0/me/accounts?fields=name,instagram_business_account{id,username}&access_token=$IG_TOKEN" | jq '.data // .'
-          if [ -n "$IG_USER_ID" ]; then
-            echo "Conta configurada em IG_USER_ID:"
-            curl -s "https://graph.facebook.com/v21.0/$IG_USER_ID?fields=id,username&access_token=$IG_TOKEN" | jq .
-          fi
+          G=https://graph.facebook.com/v21.0
+          echo "== Quem sou eu"; curl -s "$G/me?fields=id,name&access_token=$T" | jq -c .
+          echo "== Permissões"; curl -s "$G/me/permissions?access_token=$T" | jq -c .
+          echo "== Ativos do robô"; curl -s "$G/me/assigned_business_assets?access_token=$T" | jq -c . || true
+          echo "== Conta $ID"; curl -s "$G/$ID?fields=id,username&access_token=$T" | jq -c .
+          echo "== Conta $ID (só id)"; curl -s "$G/$ID?access_token=$T" | jq -c .
+          echo "== Portfólio"; curl -s "$G/1779636939800028/owned_instagram_accounts?fields=id,username&access_token=$T" | jq -c .
+          echo "== Portfólio (v2)"; curl -s "$G/1779636939800028/instagram_accounts?fields=id,username&access_token=$T" | jq -c .

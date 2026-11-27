@@ -3,7 +3,12 @@ name: 1 - Preparar post (prévia)
 on:
   schedule:
     - cron: "0 11 */2 * *"   # a cada 2 dias, 8h de Brasília
-  workflow_dispatch: {}       # botão "Run workflow" para testar na hora
+  workflow_dispatch:          # botão "Run workflow" para testar na hora
+    inputs:
+      proprio:
+        description: "Usar conteúdo próprio do Indicaê (sem notícia)"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -20,6 +25,8 @@ jobs:
       - run: pip install -r requirements.txt
       - name: Buscar notícia e montar artes
         id: prep
+        env:
+          CONTEUDO_PROPRIO: ${{ inputs.proprio && '1' || '0' }}
         run: echo "pasta=$(python autopost/preparar.py)" >> "$GITHUB_OUTPUT"
       - name: Salvar imagens no repositório
         if: steps.prep.outputs.pasta != ''

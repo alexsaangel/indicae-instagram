@@ -3,7 +3,12 @@ name: 2 - Publicar aprovados
 on:
   schedule:
     - cron: "15 * * * *"     # confere de hora em hora
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      agora:
+        description: "Publicar já as prévias abertas (sem esperar as 4h)"
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -24,4 +29,5 @@ jobs:
           IG_TOKEN: ${{ secrets.IG_TOKEN }}
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
           MAKE_WEBHOOK: ${{ secrets.MAKE_WEBHOOK }}
+          PUBLICAR_AGORA: ${{ inputs.agora }}
         run: python autopost/publicar.py

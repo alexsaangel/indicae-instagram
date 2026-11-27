@@ -21,3 +21,5 @@ jobs:
           echo "== Conta $ID (só id)"; curl -gs "$G/$ID?access_token=$T" | jq -c .
           echo "== Portfólio"; curl -gs "$G/1779636939800028/owned_instagram_accounts?fields=id,username&access_token=$T" | jq -c .
           echo "== Portfólio (v2)"; curl -gs "$G/1779636939800028/instagram_accounts?fields=id,username&access_token=$T" | jq -c .
+          echo "== Teste de montagem (NÃO publica)"
+          curl -gs -X POST "$G/$ID/media" --data-urlencode "image_url=https://raw.githubusercontent.com/alexsaangel/indicae-instagram/main/posts/2026-11-26/feed.jpg" --data-urlencode "caption=teste interno" -d "access_token=$T" | jq -c .
